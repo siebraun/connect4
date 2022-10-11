@@ -1,0 +1,44 @@
+.chip {
+  background-color: salmon;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.yellow {
+  background-color: khaki;
+}
+
+.placed-chip {
+  background-color: salmon;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 9px;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  margin: 0;
+}
+
+td {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  background-color: lightpink;
+}
+
+.game-over {
+  position: absolute;
+  left: 410px;
+  top: -300px;
+  font-size: 5rem;
+  transition: all 2s ease;
+}
