@@ -1,4 +1,4 @@
-.chip {
+/* .chip {
   background-color: salmon;
   width: 80px;
   height: 80px;
@@ -10,7 +10,7 @@
   background-color: khaki;
 }
 
-.placedChip {
+.placed-chip {
   background-color: salmon;
   width: 80px;
   height: 80px;
@@ -41,4 +41,66 @@ td {
   top: -300px;
   font-size: 5rem;
   transition: all 2s ease;
+} */
+
+.chip {
+  margin: 0;
+  padding: 0;
+  background-color: salmon;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.placed-chip {
+  margin: 0;
+  padding: 0;
+  background-color: salmon;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-left: 9px;
+}
+
+.board {
+  display: flex;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  margin: 0;
+  border-collapse: collapse;
+}
+
+td {
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  background-color: lightpink;
+}
+
+.yellow {
+  background-color: khaki;
+}
+
+.winner {
+  margin-right: 0 auto;
+  margin-left: 0 auto;
+  opacity: 1;
+  position: absolute;
+  left: 575px;
+  top: 400px;
+  font-size: 4rem;
+  z-index: 20;
+  color: khaki;
+}
+
+.game-over {
+  position: absolute;
+  left: 410px;
+  top: -300px;
+  font-size: 5rem;
 }

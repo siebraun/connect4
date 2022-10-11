@@ -1,55 +1,98 @@
 //declare global variables
-let td = document.querySelectorAll("td");
-let chip = document.querySelector(".chip");
-let inner = document.querySelector(".inner");
-let introMsg = document.querySelector(".intro");
-let spotsOpen = 0;
+const td = document.querySelectorAll("td");
+const chip = document.querySelector(".chip");
 
 //add listeners to every cell
 for (let i = 0; i < td.length; i++) {
-  // dropping chip
+  //listener responsible for moving chip over column then darken column
+  td[i].addEventListener("mouseover", selectColumn);
+  //listener responsible for dropping chip
   td[i].addEventListener("click", dropChip);
-
-  // checking for win
-  checkBoard();
+  //listener responsible for checking for win
 }
 
+//declare selectColumn function
+function selectColumn() {
+  //call function to position chip over column
+  displayChipAtTop(this);
+  //grab current column and store it in variable
+
+  //declare displayChipAtTop function
+  function displayChipAtTop(cell) {
+    //switch position given column
+    switch (cell.className) {
+      case "column-1":
+        chip.style.left = "328px";
+        break;
+      case "column-2":
+        chip.style.left = "425px";
+        break;
+      case "column-3":
+        chip.style.left = "524px";
+        break;
+      case "column-4":
+        chip.style.left = "627px";
+        break;
+      case "column-5":
+        chip.style.left = "728px";
+        break;
+      case "column-6":
+        chip.style.left = "826px";
+        break;
+      case "column-7":
+        chip.style.left = "928px";
+        break;
+    }
+  }
+}
+
+//declare dropChip function
 function dropChip() {
+  //create new chip to drop
   let placedChip = document.createElement("div");
+
+  //create var to hold the amount of spots open in the column
+  let spotsOpen = 0;
+
+  //put chip together
   placedChip.classList.add("placed-chip");
 
-  //set clicked td as having a chip
+  //call place chip funcion and pass it the current td
   placeChip(this);
 
-  //switch colors
+  //call function to change chip
   changeChip();
 
-  // place the chip
+  //declare placeChip function
   function placeChip(cell) {
+    //grab current column
     let currentColumn = cell.className;
+    //create array to hold each td with the currentColumn
     let filterArray = [];
 
-    //loop through all td's checking if they have chips
+    //loop through all td's
     for (let i = 0; i < td.length; i++) {
-      //if you click on column, add it to array
+      //if td has column add td to filterArray
       if (td[i].classList.contains(currentColumn)) {
         filterArray.push(td[i]);
       }
     }
-
-    //check if currentColumn alrady has chips
+    //loop through filterArray
     for (let i = 0; i < filterArray.length; i++) {
+      //create boolean var to see if td in filterArray already has chip
       let hasChip = filterArray[i].hasChildNodes();
-      //if it doesn't, place a chip
+      //if cell doesn't have div.chip then placeChip
       if (!hasChip) {
+        //place chip
+        //if the td below td[i] is empty, chip will be blessed in that td
         filterArray[i].appendChild(placedChip);
-        // and increase spotsOpen
+        // increase spotsOpen
         spotsOpen++;
       }
     }
   }
 
-  //change the next chip's color
+  //declare changeChip function
   function changeChip() {
     //if chip isn't yellow then chip is now yellow
     if (!chip.classList.contains("yellow")) {
@@ -139,44 +182,44 @@ function checkBoard() {
     [13, 20, 27, 34],
   ];
 
+  //now take the 4 combo values & plug them into the game board values
   for (let i = 0; i < winCombos.length; i++) {
     const i1 = td[winCombos[i][0]];
     const i2 = td[winCombos[i][1]];
     const i3 = td[winCombos[i][2]];
     const i4 = td[winCombos[i][3]];
-
-    //check if all spots are yellow chips or red chips
+    //now check to see if all 4 spots have a chip
     if (
       i1.hasChildNodes() === true &&
       i2.hasChildNodes() === true &&
       i3.hasChildNodes() === true &&
       i4.hasChildNodes() === true
     ) {
-      //are they yellow?
+      //if they do now check those chips to see if they all have the class of yellow
       if (
         i1.firstChild.classList.contains("yellow") &&
         i2.firstChild.classList.contains("yellow") &&
         i3.firstChild.classList.contains("yellow") &&
         i4.firstChild.classList.contains("yellow")
       ) {
-        //if they are, yellow wins
-        gameOver("Yellow", i1, i2, i3, i4);
+        //if they do yellow is passed as the winner as well as the chip positions
+        gameOver("yellow");
       }
-      //are they all red?
+      //now check to see if none of them have  the yellow class
       else if (
         !i1.firstChild.classList.contains("yellow") &&
         !i2.firstChild.classList.contains("yellow") &&
         !i3.firstChild.classList.contains("yellow") &&
         !i4.firstChild.classList.contains("yellow")
       ) {
-        //if they are, red wins
-        gameOver("Red", i1, i2, i3, i4);
+        //if they don't red is passed as the winner as well as the chip positions
+        gameOver("red");
       }
     }
   }
 
   //delcare gameOver function
-  function gameOver() {
-    console.log("wins!");
-  }
+  function gameOver(winner) {}
+  //declare display function
+  console.log(winner);
 }
